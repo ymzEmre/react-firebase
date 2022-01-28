@@ -44,7 +44,6 @@ form .field-group:last-child .field {
   width: 317px;
 }
 
-
 .form-input:hover {
   background-color: #abb2b9;
   border: 1px solid #fff;
@@ -57,14 +56,13 @@ form .field-group:last-child .field {
   cursor: default;
 }
 
-
 .form {
   border: 1px #1b1b1b solid !important;
   background-color: #0f1830;
   border-radius: 9px;
   width: 500px;
   box-shadow: 0px 0px 10px 1px #f5f5f5;
-  height: 420px;
+  height: 320px;
 }
 
 .container {
@@ -76,7 +74,6 @@ form .field-group:last-child .field {
   background-attachment: fixed;
 }
 
-
 .oop {
   position: absolute;
   top: -41px;
@@ -86,7 +83,6 @@ form .field-group:last-child .field {
   color: #020202;
   text-shadow: 0px 0px 3px #f5f5f5, 0px 0px 8px #f5f5f5, 0px 0px 9px #f5f5f5;
 }
-
 
 .container-form-name {
   position: relative;
@@ -115,14 +111,13 @@ form .field-group:last-child .field {
 }
 
 .form-button:focus {
-  outline: 0
+  outline: 0;
 }
 
 .addButton {
   background-color: #23881b;
   transition-duration: 0.5s;
   margin-right: 9px;
-
 }
 
 .container-form-button {
@@ -138,13 +133,11 @@ form .field-group:last-child .field {
   border: none;
 }
 
-
 .clearButton {
   background-color: #d02523;
   transition-duration: 0.5s;
   margin-right: -15px;
 }
-
 
 .field-container {
   position: relative;
@@ -157,5 +150,4 @@ form .field-group:last-child .field {
   box-shadow: 0px 0px 8px 1px #fff;
   border: none;
   outline: 0;
-
 }

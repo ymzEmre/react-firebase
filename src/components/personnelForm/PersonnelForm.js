@@ -4,9 +4,7 @@ import alertify from "alertifyjs";
 
 const PersonnelForm = (props) => {
   const fieldValues = {
-    tcNo: "",
     fullName: "",
-    gender: "",
     phone: "",
     email: "",
     department: "",
@@ -16,7 +14,7 @@ const PersonnelForm = (props) => {
   var [values, setValues] = useState(fieldValues);
 
   useEffect(() => {
-    if (props.currentId === "") setValues({ ...fieldValues });
+    if (props.currentId == "") setValues({ ...fieldValues });
     else
       setValues({
         ...props.PersonnelObjects[props.currentId],
@@ -33,105 +31,56 @@ const PersonnelForm = (props) => {
   };
 
   alertify.set("notifier", "position", "top-right");
-  // alertify.set("notifier", "delay", 10000);
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const formValidation =
-      values.tcNo.trim() === "" ||
-      values.fullName.trim() === "" ||
-      values.gender.trim() === "" ||
-      values.phone.trim() === "" ||
-      values.email.trim() === "" ||
-      values.department.trim() === "" ||
-      values.salary.trim() === "";
+      values.fullName.trim() == "" ||
+      values.phone.trim() == "" ||
+      values.email.trim() == "" ||
+      values.department.trim() == "" ||
+      values.salary.trim() == "";
 
-    const formValidationtcNoNan = isNaN(values.tcNo);
     const formValidationphoneNan = isNaN(values.phone);
     const formValidationsalaryNan = isNaN(values.salary);
 
     if (formValidation) {
       console.log(values.tcNo);
-      alertify.error("Boş Alan Bırakmayın !");
-    } else if (formValidationtcNoNan) {
-      alertify.error("Lütfen TC Alanına Sayı Girin !");
+      alertify.error("Please fill in all fields !");
     } else if (formValidationphoneNan) {
-      alertify.error("Lütfen TELEFON Alanına Sayı Girin !");
+      alertify.error("Please enter a number in the Phone Field !");
     } else if (formValidationsalaryNan) {
-      alertify.error("Lütfen MAAŞ Alanına Sayı Girin !");
+      alertify.error("Please enter a number in the Salary Field !");
     } else {
       props.addOrEdit(values);
       const addOrEditAlert =
-        props.currentId === ""
-          ? alertify.success(values.fullName + " Personel Eklendi")
-          : alertify.success(
-              props.PersonnelObjects[props.currentId].fullName +
-                " İsimli Personel Güncellendi"
-            );
+        props.currentId == ""
+          ? alertify.success(values.fullName + " User Added")
+          : alertify.success(props.PersonnelObjects[props.currentId].fullName + " User Edited");
     }
   };
 
   return (
     <div>
       <div className="container-form-name">
-        <span className="form-name">Personel Ekle</span>
+        <span className="form-name"> User Add </span>
       </div>
       <div className="container">
         <form className="form" onSubmit={handleFormSubmit} autoComplete="off">
           <div className="field-container">
             <div class="field-group">
-              <label htmlFor="tcNo" className="label">
-                TC
-              </label>
-              <div class="field">
-                <input
-                  className="form-input"
-                  name="tcNo"
-                  value={values.tcNo}
-                  maxLength="11"
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-
-            <div class="field-group">
               <label htmlFor="fullName" className="label">
-                Ad Soyad
+                Full Name
               </label>
               <div class="field">
-                <input
-                  className="form-input"
-                  id="phone"
-                  name="fullName"
-                  value={values.fullName}
-                  onChange={handleInputChange}
-                />
+                <input className="form-input" id="phone" name="fullName" value={values.fullName} onChange={handleInputChange} />
               </div>
             </div>
 
             <div class="field-group">
-              <label htmlFor="gender" className="label">
-                Cinsiyet
-              </label>
+              <label className="label"> Phone </label>
               <div class="field">
-                <input
-                  className="form-input"
-                  name="gender"
-                  value={values.gender}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-
-            <div class="field-group">
-              <label className="label">Telefon</label>
-              <div class="field">
-                <input
-                  className="form-input"
-                  name="phone"
-                  value={values.phone}
-                  onChange={handleInputChange}
-                />
+                <input className="form-input" name="phone" value={values.phone} onChange={handleInputChange} />
               </div>
             </div>
 
@@ -149,26 +98,16 @@ const PersonnelForm = (props) => {
             </div>
 
             <div class="field-group">
-              <label className="label">Departman</label>
+              <label className="label">Department</label>
               <div class="field">
-                <input
-                  className="form-input"
-                  name="department"
-                  value={values.department}
-                  onChange={handleInputChange}
-                />
+                <input className="form-input" name="department" value={values.department} onChange={handleInputChange} />
               </div>
             </div>
 
             <div class="field-group">
-              <label className="label">Maaş</label>
+              <label className="label">Salary</label>
               <div class="field">
-                <input
-                  className="form-input"
-                  name="salary"
-                  value={values.salary}
-                  onChange={handleInputChange}
-                />
+                <input className="form-input" name="salary" value={values.salary} onChange={handleInputChange} />
               </div>
             </div>
           </div>
@@ -176,12 +115,8 @@ const PersonnelForm = (props) => {
           <div className="container-form-button">
             <div class="field-group">
               <div class="field">
-                <button
-                  type="reset"
-                  className="clearButton form-button"
-                  value="Temizle"
-                >
-                  <i className="fas fa-times fa-icon"></i> Temizle
+                <button type="reset" className="clearButton form-button" value="Temizle">
+                  <i className="fas fa-times fa-icon"></i> Clear
                 </button>
               </div>
             </div>
@@ -190,7 +125,7 @@ const PersonnelForm = (props) => {
               <div class="field">
                 <button className="addButton form-button" type="submit">
                   <i className="fas fa-check fa-icon"></i>
-                  {props.currentId === "" ? "  Kaydet" : "  Güncelle"}
+                  {props.currentId == "" ? "  Save" : "  Update"}
                 </button>
               </div>
             </div>
