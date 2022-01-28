@@ -82,8 +82,7 @@ const PersonnelList = () => {
                 <td className="textIndent">{PersonnelObjects[id].phone}</td>
                 <td className="textIndent">{PersonnelObjects[id].email}</td>
                 <td className="textIndent">{PersonnelObjects[id].department}</td>
-                <td className="textIndent">{PersonnelObjects[id].salary + " ₺"}</td>
-
+                <td className="textIndent">{PersonnelObjects[id].salary}</td>
                 <td className="center iconSet">
                   <i
                     onClick={() => {
