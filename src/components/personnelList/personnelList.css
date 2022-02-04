@@ -17,7 +17,7 @@ tr.highlighted td {
 .personnelTable th {
   position: sticky;
   top: 0;
-  background-color: #175466;
+  background-color: #2a343e;
   text-align: center;
   padding: 17px 0px 17px 0px;
   color: #fff;
@@ -65,7 +65,6 @@ tr:nth-child(odd) {
 }
 
 .fa-user-times {
-
   color: #d02523;
 }
 
