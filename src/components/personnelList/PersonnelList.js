@@ -24,12 +24,12 @@ const PersonnelList = () => {
   const addOrEdit = (obj) => {
     if (currentId == "")
       firebaseDb.child("personnel-demo").push(obj, (err) => {
-        if (err) console.log(err);
+        if (err) return;
         else setCurrentId("");
       });
     else
       firebaseDb.child(`personnel-demo/${currentId}`).set(obj, (err) => {
-        if (err) console.log(err);
+        if (err) return;
         else setCurrentId("");
       });
   };
@@ -49,12 +49,15 @@ const PersonnelList = () => {
       PersonnelObjects[key].fullName + " will be deleted",
       function () {
         firebaseDb.child(`personnel-demo/${key}`).remove((err) => {
-          if (err) console.log(err);
+          if (err) return console.log(err);
           else setCurrentId("");
         });
         alertify.success(PersonnelObjects[key].fullName + " deleted");
       },
-      function () {}
+
+      function () {
+        alertify.error("Delete Cancel");
+      }
     );
   };
 
@@ -62,49 +65,43 @@ const PersonnelList = () => {
     <div>
       <PersonnelForm {...{ addOrEdit, currentId, PersonnelObjects }} />
 
-      <table id="data" className="personnelTable">
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Phone</th>
-            <th>E-Mail</th>
-            <th>Department</th>
-            <th>Salary</th>
-            <th></th>
-          </tr>
-        </thead>
+      <div className="user-list-title">
+        <span>Full Name</span>
+        <span>Phone</span>
+        <span>E-Mail</span>
+        <span>Department</span>
+        <span>Salary</span>
+        <span></span>
+      </div>
 
-        <tbody>
-          {Object.keys(PersonnelObjects).map((id) => {
-            return (
-              <tr key={id}>
-                <td className="textIndent">{PersonnelObjects[id].fullName}</td>
-                <td className="textIndent">{PersonnelObjects[id].phone}</td>
-                <td className="textIndent">{PersonnelObjects[id].email}</td>
-                <td className="textIndent">{PersonnelObjects[id].department}</td>
-                <td className="textIndent">{PersonnelObjects[id].salary}</td>
-                <td className="center iconSet">
-                  <i
-                    onClick={() => {
-                      setCurrentId(id);
-                    }}
-                    className="fas fa-user-edit"
-                    style={{ cursor: "pointer" }}
-                  ></i>
+      {Object.keys(PersonnelObjects).map((id) => {
+        return (
+          <div className="user-list-content" key={id}>
+            <span>{PersonnelObjects[id].fullName}</span>
+            <span>{PersonnelObjects[id].phone}</span>
+            <span>{PersonnelObjects[id].email}</span>
+            <span>{PersonnelObjects[id].department}</span>
+            <span>{PersonnelObjects[id].salary}</span>
+            <span>
+              <i
+                onClick={() => {
+                  setCurrentId(id);
+                }}
+                className="fas fa-user-edit"
+                style={{ cursor: "pointer" }}
+              ></i>
 
-                  <i
-                    onClick={() => {
-                      onDelete(id);
-                    }}
-                    className="fas fa-user-times"
-                    style={{ cursor: "pointer" }}
-                  ></i>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+              <i
+                onClick={() => {
+                  onDelete(id);
+                }}
+                className="fas fa-user-times"
+                style={{ cursor: "pointer" }}
+              ></i>
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 };
