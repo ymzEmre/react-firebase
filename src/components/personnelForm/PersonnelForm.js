@@ -30,6 +30,10 @@ const PersonnelForm = (props) => {
     });
   };
 
+  const formClear = () => {
+    setValues({ ...fieldValues });
+  };
+
   alertify.set("notifier", "position", "top-right");
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -78,13 +82,7 @@ const PersonnelForm = (props) => {
             <div className="field-group">
               <label className="label">E-Mail</label>
               <div className="field">
-                <input
-                  // type="email"
-                  className="form-input"
-                  name="email"
-                  value={values.email}
-                  onChange={handleInputChange}
-                />
+                <input className="form-input" name="email" value={values.email} onChange={handleInputChange} />
               </div>
             </div>
 
@@ -106,7 +104,13 @@ const PersonnelForm = (props) => {
           <div className="container-form-button">
             <div className="field-group">
               <div className="field">
-                <button type="reset" className="clearButton form-button" value="Temizle">
+                <button
+                  onClick={() => {
+                    formClear();
+                  }}
+                  type="reset"
+                  className="clearButton form-button"
+                >
                   <i className="fas fa-times fa-icon"></i> Clear
                 </button>
               </div>

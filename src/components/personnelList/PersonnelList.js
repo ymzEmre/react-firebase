@@ -56,7 +56,7 @@ const PersonnelList = () => {
       },
 
       function () {
-        alertify.error("Delete Cancel");
+        alertify.error("Delete cancel");
       }
     );
   };
